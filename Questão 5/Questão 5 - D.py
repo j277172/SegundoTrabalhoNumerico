@@ -13,10 +13,6 @@ print("ANÁLISE: O QUE ACONTECE COM h MUITO PEQUENO")
 print("Questão 5 - Item d)")
 print("="*90)
 
-# ============================================================================
-# PARTE 1: TABELA DE ESCALABILIDADE
-# ============================================================================
-
 print("\n>>> ESCALABILIDADE COM REDUÇÃO DE h:")
 print("-"*90)
 
@@ -27,27 +23,15 @@ print("-"*90)
 
 for h in h_valores:
     n = int(1.0 / h) + 1
-    
-    # Memória = 3 arrays de tamanho n, 8 bytes cada
     mem_mb = (3 * n * 8) / (1024**2)
-    
-    # Operações Thomas = 8n
     ops = 8 * n
-    
-    # Tempo (1 GFlop/s típico)
     tempo = ops / 1e9
-    
     status = ""
     if h == 0.00001:
         status = " ← Item d.1: VIÁVEL"
     elif h == 0.000000001:
         status = " ← Item d.2: IMPRATICÁVEL"
-    
     print(f"{h:<15.10f} {n:<15} {mem_mb:<15.2f} {ops:<18.2e} {tempo:<15.6f}{status}")
-
-# ============================================================================
-# PARTE 2: ANÁLISE PARA h = 0.00001
-# ============================================================================
 
 print("\n>>> ANÁLISE PARA h = 0.00001:")
 print("-"*90)
@@ -71,10 +55,6 @@ print(f"  - Memória cabe em qualquer PC")
 print(f"  - Tempo: milissegundos (muito rápido)")
 print(f"  - Precisão: excelente (O(h²) mantida)")
 print(f"  - Sem problemas de cancelamento numérico")
-
-# ============================================================================
-# PARTE 3: ANÁLISE PARA h = 0.000000001
-# ============================================================================
 
 print("\n>>> ANÁLISE PARA h = 0.000000001:")
 print("-"*90)
@@ -116,10 +96,6 @@ print(f"  - Sistema operacional faria paginação = MUITO LENTO")
 print(f"  - Cancelamento numérico degrada solução")
 print(f"  - Erro observado PIOR que com h = 0.00001!")
 
-# ============================================================================
-# PARTE 4: ANÁLISE DO CANCELAMENTO NUMÉRICO
-# ============================================================================
-
 print("\n>>> FENÔMENO DE CANCELAMENTO NUMÉRICO:")
 print("-"*90)
 
@@ -140,13 +116,9 @@ print(f"  h = 0.001  → erro ~ 2.4e-4    (melhorando)")
 print(f"  h = 1e-5   → erro ~ 3.8e-11   (ótimo)")
 print(f"  h = 1e-6   → erro ~ 1e-15     (PIOR - domina arredondamento)")
 
-print(f"\nConclussão:")
+print(f"\nConclusão:")
 print(f"  ✓ Reduzir h melhora até h ≈ 1e-6")
 print(f"  ✗ Reduzir mais PIORA a solução")
-
-# ============================================================================
-# PARTE 5: COMPLEXIDADE COMPUTACIONAL
-# ============================================================================
 
 print("\n>>> COMPLEXIDADE COMPUTACIONAL:")
 print("-"*90)
@@ -159,8 +131,7 @@ print(f"  - Operações exatas: 8n - 8")
 print(f"\nComparação com matriz densa:")
 print(f"  - Tempo densa: O(n³)")
 print(f"  - Espaço denso: O(n²)")
-print(f"  
-MDF tridiagonal é MUITO mais eficiente!")
+print(f"  - MDF tridiagonal é MUITO mais eficiente!")  # CORREÇÃO AQUI
 
 print(f"\nCrescimento com redução de h:")
 h_ratios = [0.1, 0.05, 0.025, 0.01]
@@ -168,26 +139,18 @@ for i in range(len(h_ratios)-1):
     h_a = h_ratios[i]
     h_b = h_ratios[i+1]
     razao = h_a / h_b
-    
     n_a = int(1/h_a)
     n_b = int(1/h_b)
-    
     t_a = (8*n_a) / 1e9
     t_b = (8*n_b) / 1e9
-    
     print(f"  h: {h_a:.3f} → {h_b:.3f} (reduz {razao:.1f}x)")
     print(f"    n: {n_a:5d} → {n_b:5d} (cresce {n_b/n_a:.1f}x)")
     print(f"    tempo: {t_a:.2e} → {t_b:.2e} (cresce {t_b/t_a:.1f}x)")
-
-# ============================================================================
-# PARTE 6: RECOMENDAÇÕES
-# ============================================================================
 
 print("\n>>> RECOMENDAÇÕES PRÁTICAS:")
 print("-"*90)
 
 print(f"\nAo invés de reduzir h indefinidamente:")
-
 print(f"\n1. USAR h ADAPTATIVO:")
 print(f"   - Malha fina onde erro é grande (perto do centro)")
 print(f"   - Malha grossa onde erro é pequeno (perto dos contornos)")
@@ -205,15 +168,11 @@ print(f"\n4. ESCOLHER h ÓTIMO:")
 print(f"   - Para este PVC: h_ótimo ≈ 1e-6")
 print(f"   - Minimiza erro total (truncamento + arredondamento)")
 
-# ============================================================================
-# RESUMO FINAL
-# ============================================================================
-
 print("\n" + "="*90)
 print("RESUMO E CONCLUSÕES")
 print("="*90)
 
-print(f"""
+print("""
 Para h = 0.00001:
   ✓ Viável completamente
   ✓ 100K pontos, 2.4 MB memória
